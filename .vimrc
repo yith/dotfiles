@@ -38,8 +38,28 @@ NeoBundleLazy 'Shougo/vimfiler', {
   \     'commands' : [ 'VimFilerTab', 'VimFiler', 'VimFilerExplorer', 'VimFilerBufferDir' ]
   \ }}
 
-NeoBundle 'Shougo/neosnippet.git'
-NeoBundle 'Shougo/neocomplcache.git'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
+
+" neocomplete
+if has('lua') && v:version >= 703
+  NeoBundle 'Shougo/neocomplete.vim'
+  let g:neocomplete#enable_at_startup = 1
+  let s:hooks = neobundle#get_hooks("neocomplete.vim")
+  function! s:hooks.on_source(bundle)
+    let g:acp_enableAtStartup = 0
+    let g:neocomplet#enable_smart_case = 1
+  endfunction
+else
+  NeoBundle 'Shougo/neocomplcache.vim'
+  let g:neocomplcache_enable_at_startup = 1
+  let s:hooks = neobundle#get_hooks("neocomplcache.vim")
+  function! s:hooks.on_source(bundle)
+    let g:acp_enableAtStartup = 0
+    let g:neocomplcache_enable_smart_case = 1
+  endfunction
+endif
+
 NeoBundleLazy 'Shougo/vimshell.git', {
   \ 'autoload': {
   \   'commands': ['VimShell', 'VimShellPop', 'VimShellCreate']
@@ -57,6 +77,7 @@ NeoBundle 'vim-scripts/errormarker.vim.git'
 
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'YankRing.vim'
+NeoBundle 'eregex.vim'
 
 NeoBundle 'ZenCoding.vim'
 NeoBundle 'scrooloose/syntastic'
@@ -122,17 +143,17 @@ colorscheme molokai
 let g:molokai_original = 1
 
 " unite.vim
-let s:hooks = neobundle#get_hooks("unite.vim")
+let s:hooks = neobundle#get_hooks('unite.vim')
 function! s:hooks.on_source(bundle)
   let g:unite_enable_start_insert = 1
 
-  call unite#custom_default_action("source/bookmark/directory", "vimfiler")
-  call unite#custom_default_action("directory", "vimfiler")
-  call unite#custom_default_action("directory_mru", "vimfiler")
+  call unite#custom_default_action('source/bookmark/directory', 'vimfiler')
+  call unite#custom_default_action('directory', 'vimfiler')
+  call unite#custom_default_action('directory_mru', 'vimfiler')
 endfunction
 
 " vimfiler
-let s:hooks = neobundle#get_hooks("vimfiler")
+let s:hooks = neobundle#get_hooks('vimfiler')
 function! s:hooks.on_source(bundle)
   let g:vimfiler_as_default_explorer = 1
   let g:vimfiler_enable_auto_cd = 1
@@ -144,16 +165,16 @@ function! s:hooks.on_source(bundle)
   endfunction
 endfunction
 
-" neocomplcache
-let g:neocomplcache_enable_at_startup = 1
-
 " neosnippet
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
-"   SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-"   For snippet_complete marker.
+xmap <C-k> <Plug>(neosnippet_expand_target)
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)"
+  \: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)"
+  \: "\<TAB>"
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
@@ -186,10 +207,6 @@ endfunction
 " encoding
 set encoding=utf-8
 set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
-
-" Syntastic
-"SyntasticCheck
-
 
 " ctags
 set tags=.tags;
@@ -248,5 +265,8 @@ function! s:hooks.on_source(bundle)
   autocmd MyAutoCmd FileType python setl omnifunc=jedi#completions
   let g:jedi#completions_enabled = 0
   let g:jedi#auto_vim_configuration = 0
+  if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+  endif
   let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 endfunction
