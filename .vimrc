@@ -1,33 +1,80 @@
+augroup MyAutoCmd
+  autocmd!
+augroup END
+
 " neobundle
-set nocompatible               " Be iMproved
-filetype off                   " Required!
+set nocompatible
 if has('vim_starting')
   set runtimepath+=~/.vim/neobundle.vim
-  call neobundle#rc(expand('~/.vim/bundle'))
 endif
-NeoBundle 'Shougo/neocomplcache.git'
-NeoBundle 'Shougo/neosnippet.git'
-NeoBundle 'Shougo/unite.vim.git'
-NeoBundle 'Shougo/vimshell.git'
-NeoBundle 'derekwyatt/vim-scala.git'
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'szw/vim-tags'
-NeoBundle 'tomasr/molokai.git'
-NeoBundle 'vim-scripts/errormarker.vim.git'
-NeoBundle 'wincent/Command-T'
+call neobundle#rc(expand('~/.vim/bundle'))
 
-NeoBundle 'ZenCoding.vim'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'groenewege/vim-less'
-NeoBundle 'othree/html5.vim.git'
-NeoBundle 'gre/play2vim.git'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'tpope/vim-surround'
-NeoBundle "YankRing.vim"
+NeoBundle 'Shougo/vimproc', {
+  \ 'build' : {
+  \   'windows' : 'make -f make_mingw32.mak',
+  \   'cygwin'  : 'make -f make_cygwin.mak',
+  \   'mac'     : 'make -f make_mac.mak',
+  \   'unix'    : 'make -f make_unix.mak',
+  \  }}
+
+NeoBundleLazy 'Shougo/unite.vim', {
+  \ 'autoload': {
+  \   'commands': ['Unite', 'UniteWithBufferDir', 'UniteWithCurrentDir'],
+  \ }}
+
+NeoBundleLazy 'h1mesuke/unite-outline', {
+  \ 'autoload': {
+  \   'unite_sources': ['outline'],
+  \ }}
+
+NeoBundleLazy 'Shougo/neomru.vim', {
+  \ 'autoload': {
+  \   'unite_sources': ['file_mru'],
+  \ }}
+
+NeoBundleLazy 'Shougo/vimfiler', {
+  \ 'depends': ['Shougo/unite.vim'],
+  \ 'autoload': {
+  \     'commands' : [ 'VimFilerTab', 'VimFiler', 'VimFilerExplorer', 'VimFilerBufferDir' ]
+  \ }}
+
+NeoBundle 'Shougo/neosnippet.git'
+NeoBundle 'Shougo/neocomplcache.git'
+NeoBundleLazy 'Shougo/vimshell.git', {
+  \ 'autoload': {
+  \   'commands': ['VimShell', 'VimShellPop', 'VimShellCreate']
+  \ }}
+
+NeoBundle 'mkitt/tabline.vim.git'
+NeoBundle 'itchyny/lightline.vim'
+
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'troydm/easybuffer.vim'
+
+NeoBundle 'tomasr/molokai.git'
+NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'vim-scripts/errormarker.vim.git'
+
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'YankRing.vim'
+
+NeoBundle 'ZenCoding.vim'
+NeoBundle 'scrooloose/syntastic'
+
+NeoBundleLazy 'majutsushi/tagbar', {
+  \ 'autoload': {
+  \   'commands': ['TagbarToggle'],
+  \ }}
+
+" Python
+NeoBundleLazy 'davidhalter/jedi-vim', {
+  \ 'autoload': {
+  \   'filetypes': ['python', 'python3', 'djangohtml']
+  \ }}
+NeoBundleLazy 'lambdalisue/vim-django-support', {
+  \ 'autoload': {
+  \   'filetypes': ['python', 'python3', 'djangohtml']
+  \ }}
 
 filetype plugin indent on     " Required!
 
@@ -50,6 +97,13 @@ set autoindent
 set tabstop=2
 set shiftwidth=2
 set expandtab
+" line
+set wrap
+set colorcolumn=80
+" backup
+set nowritebackup
+set nobackup
+set noswapfile
 " etc
 set hidden
 set smartcase
@@ -59,20 +113,41 @@ set backspace=indent,eol,start
 set hlsearch
 set incsearch
 syntax on
+"
+" lightline.vim
+set laststatus=2
 
 " colorschehme
 colorscheme molokai
-let g:molokai_original=1
+let g:molokai_original = 1
+
+" unite.vim
+let s:hooks = neobundle#get_hooks("unite.vim")
+function! s:hooks.on_source(bundle)
+  let g:unite_enable_start_insert = 1
+
+  call unite#custom_default_action("source/bookmark/directory", "vimfiler")
+  call unite#custom_default_action("directory", "vimfiler")
+  call unite#custom_default_action("directory_mru", "vimfiler")
+endfunction
+
+" vimfiler
+let s:hooks = neobundle#get_hooks("vimfiler")
+function! s:hooks.on_source(bundle)
+  let g:vimfiler_as_default_explorer = 1
+  let g:vimfiler_enable_auto_cd = 1
+  let g:vimfiler_ignore_pattern = "\%(\.pyc$\)"
+
+  autocmd MyAutoCmd FileType vimfiler call s:vimfiler_settings()
+  function! s:vimfiler_settings()
+    nmap <buffer> <C-l> <C-w>l
+  endfunction
+endfunction
 
 " neocomplcache
 let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_dictionary_filetype_lists = {
-    \ 'default' : '',
-    \ 'scala' : $HOME . '/.vim/dict/scala.dict',
-    \ }
 
 " neosnippet
-"   Plugin key-mappings.
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 "   SuperTab like snippets behavior.
@@ -84,16 +159,10 @@ if has('conceal')
 endif
 let g:neosnippet#snippets_directory='~/.vim/snippets'
 
-" vimsehll
-"let g:vimshell_interactive_update_time = 10
-"let g:vimshell_prompt = $USER."% "
-"vimshell map
-"nmap vs :VimShell<CR>
-"nmap vp :VimShellPop<CR>
-
-" make
-autocmd FileType scala :compiler sbt
-autocmd QuickFixCmdPost make if len(getqflist()) != 0 | copen | endif
+" VimShell
+nnoremap <silent> vs :<C-u>VimShell<CR>
+nnoremap <silent> vsc :<C-u>VimShellCreate<CR>
+nnoremap <silent> vp :<C-u>VimShellPop<CR>
 
 " marker
 let g:errormarker_errortext     = '!!'
@@ -102,19 +171,17 @@ let g:errormarker_errorgroup    = 'Error'
 let g:errormarker_warninggroup  = 'ToDo'
 
 " TagBar
-nnoremap <F8> :TagbarToggle<CR>
+nnoremap <F8> <C-u>:TagbarToggle<CR>
 
-" NERDTree
-nnoremap <F2> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-let g:NERDTreeShowHidden=0
-
-" vim-tags
-nnoremap <C-]> g<C-]>
-
-" indent-guides
-let g:indent_guides_guide_size = 1
-let g:indent_guides_auto_colors = 1
+" vim-indent-guides
+let s:hooks = neobundle#get_hooks('vim-indent-guides')
+function! s:hooks.on_source(bundle)
+  let g:indent_guides_guide_size = 2
+  let g:indent_guides_auto_colors = 0
+  hi IndentGuidesOdd  ctermbg=17
+  hi IndentGuidesEven ctermbg=52
+  IndentGuidesEnable
+endfunction
 
 " encoding
 set encoding=utf-8
@@ -128,16 +195,58 @@ set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
 set tags=.tags;
 
 " EasyBuffer
-nnoremap <F3> :EasyBuffer<CR>
-
-" key bindings
+nnoremap <F3> :<C-u>EasyBuffer<CR>
 
 " Lokaltog/vim-easymotion
 let g:EasyMotion_keys='hjklasdfgyuiopqwertnmzxcvbHJKLASDFGYUIOPQWERTNMZXCVB'
 let g:EasyMotion_leader_key=";"
 let g:EasyMotion_grouping=1
 
+" key bindings
+
+" change window
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+" more intuitive move of cursors when line is wraped around
+nnoremap j gj
+nnoremap k gk
+
+" centralize when searching
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
+
+" disable unnecessary commands
+nnoremap ZZ <Nop>
+nnoremap ZQ <Nop>
+nnoremap Q <Nop>
+
+" tags
+nnoremap <C-]> g<C-]>
+
+" unite.vim
+nnoremap [unite] <Nop>
+nmap <Space>u [unite]
+
+nnoremap <silent> [unite]c :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru bookmark file<CR>
+nnoremap <silent> [unite]b :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]m :<C-u>Unite bookmark<CR>
+nnoremap <silent> [unite]o :<C-u>Unite outline<CR>
+
+" Use tabs of 4 spaces when writing Python
+autocmd MyAutoCmd FileType python setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
+
+" jedi-vim
+let s:hooks = neobundle#get_hooks("jedi-vim")
+function! s:hooks.on_source(bundle)
+  autocmd MyAutoCmd FileType python setl omnifunc=jedi#completions
+  let g:jedi#completions_enabled = 0
+  let g:jedi#auto_vim_configuration = 0
+  let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+endfunction
