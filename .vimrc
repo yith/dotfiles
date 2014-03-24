@@ -19,7 +19,7 @@ NeoBundle 'Shougo/vimproc', {
 
 NeoBundleLazy 'Shougo/unite.vim', {
   \ 'autoload': {
-  \   'commands': ['Unite', 'UniteWithBufferDir', 'UniteWithCurrentDir'],
+  \   'commands': ['Unite', 'UniteWithBufferDir', 'UniteWithCurrentDir', 'UniteBookmarkAdd'],
   \ }}
 
 NeoBundleLazy 'h1mesuke/unite-outline', {
@@ -69,7 +69,7 @@ NeoBundle 'mkitt/tabline.vim.git'
 NeoBundle 'itchyny/lightline.vim'
 
 NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'troydm/easybuffer.vim'
+"NeoBundle 'troydm/easybuffer.vim'
 
 NeoBundle 'tomasr/molokai.git'
 NeoBundle 'nathanaelkane/vim-indent-guides'
@@ -79,7 +79,10 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'YankRing.vim'
 NeoBundle 'eregex.vim'
 
-NeoBundle 'ZenCoding.vim'
+NeoBundleLazy 'mattn/emmet-vim', {
+  \ 'autoload': {
+  \   'filetypes': ['html', 'css', 'htmldjango']
+  \ }}
 NeoBundle 'scrooloose/syntastic'
 
 NeoBundleLazy 'majutsushi/tagbar', {
@@ -90,11 +93,11 @@ NeoBundleLazy 'majutsushi/tagbar', {
 " Python
 NeoBundleLazy 'davidhalter/jedi-vim', {
   \ 'autoload': {
-  \   'filetypes': ['python', 'python3', 'djangohtml']
+  \   'filetypes': ['python', 'python3', 'htmldjango']
   \ }}
 NeoBundleLazy 'lambdalisue/vim-django-support', {
   \ 'autoload': {
-  \   'filetypes': ['python', 'python3', 'djangohtml']
+  \   'filetypes': ['python', 'python3', 'htmldjango']
   \ }}
 
 filetype plugin indent on     " Required!
@@ -212,7 +215,7 @@ set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
 set tags=.tags;
 
 " EasyBuffer
-nnoremap <F3> :<C-u>EasyBuffer<CR>
+"nnoremap <F3> :<C-u>EasyBuffer<CR>
 
 " Lokaltog/vim-easymotion
 let g:EasyMotion_keys='hjklasdfgyuiopqwertnmzxcvbHJKLASDFGYUIOPQWERTNMZXCVB'
@@ -245,19 +248,31 @@ nnoremap ZQ <Nop>
 nnoremap Q <Nop>
 
 " tags
-nnoremap <C-]> g<C-]>
+"nnoremap <C-]> g<C-]>
 
 " unite.vim
 nnoremap [unite] <Nop>
 nmap <Space>u [unite]
 
-nnoremap <silent> [unite]c :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru bookmark file<CR>
-nnoremap <silent> [unite]b :<C-u>Unite buffer<CR>
+nnoremap <silent> <F2> :<C-u>VimFilerBufferDir<CR>
+nnoremap <silent> <F3> :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]c :<C-u>UniteWithCurrentDir file_mru file<CR>
+nnoremap <silent> [unite]b :<C-u>UniteWithBufferDir file_mru file<CR>
 nnoremap <silent> [unite]m :<C-u>Unite bookmark<CR>
+nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
 nnoremap <silent> [unite]o :<C-u>Unite outline<CR>
+nnoremap <silent> [unite]g :<C-u>Unite grep<CR>
 
-" Use tabs of 4 spaces when writing Python
+" use ag
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--line-numbers --nogroup --nocolor --ignore ''.git'''
+  let g:unite_source_grep_recursive_opt = ''
+endif
+
+" Use tabs of 4 spaces when writing Python and Django
 autocmd MyAutoCmd FileType python setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
+autocmd MyAutoCmd FileType htmldjango setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
 
 " jedi-vim
 let s:hooks = neobundle#get_hooks("jedi-vim")
