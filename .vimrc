@@ -222,47 +222,6 @@ let g:EasyMotion_keys='hjklasdfgyuiopqwertnmzxcvbHJKLASDFGYUIOPQWERTNMZXCVB'
 let g:EasyMotion_leader_key=";"
 let g:EasyMotion_grouping=1
 
-" key bindings
-
-" change window
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-" more intuitive move of cursors when line is wraped around
-nnoremap j gj
-nnoremap k gk
-
-" centralize when searching
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap * *zz
-nnoremap # #zz
-nnoremap g* g*zz
-nnoremap g# g#zz
-
-" disable unnecessary commands
-nnoremap ZZ <Nop>
-nnoremap ZQ <Nop>
-nnoremap Q <Nop>
-
-" tags
-"nnoremap <C-]> g<C-]>
-
-" unite.vim
-nnoremap [unite] <Nop>
-nmap <Space>u [unite]
-
-nnoremap <silent> <F2> :<C-u>VimFilerBufferDir<CR>
-nnoremap <silent> <F3> :<C-u>Unite buffer<CR>
-nnoremap <silent> [unite]c :<C-u>UniteWithCurrentDir file_mru file<CR>
-nnoremap <silent> [unite]b :<C-u>UniteWithBufferDir file_mru file<CR>
-nnoremap <silent> [unite]m :<C-u>Unite bookmark<CR>
-nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
-nnoremap <silent> [unite]o :<C-u>Unite outline<CR>
-nnoremap <silent> [unite]g :<C-u>Unite grep<CR>
-
 " use ag
 if executable('ag')
   let g:unite_source_grep_command = 'ag'
@@ -285,3 +244,43 @@ function! s:hooks.on_source(bundle)
   endif
   let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 endfunction
+
+" key bindings
+
+" change window
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" more intuitive move of cursors when line is wraped around
+nnoremap j gj
+nnoremap k gk
+
+" centralize when searching
+"nnoremap n nzz
+"nnoremap N Nzz
+"nnoremap * *zz
+"nnoremap # #zz
+"nnoremap g* g*zz
+"nnoremap g# g#zz
+
+" disable unnecessary commands
+nnoremap ZZ <Nop>
+nnoremap ZQ <Nop>
+nnoremap Q <Nop>
+
+" tags
+"nnoremap <C-]> g<C-]>
+
+" unite.vim
+nnoremap [unite] <Nop>
+nmap <Space>u [unite]
+nnoremap <silent> <F2> :<C-u>VimFilerBufferDir<CR>
+nnoremap <silent> <F3> :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]c :<C-u>UniteWithCurrentDir file_mru file<CR>
+nnoremap <silent> [unite]b :<C-u>UniteWithBufferDir file_mru file<CR>
+nnoremap <silent> [unite]m :<C-u>Unite bookmark<CR>
+nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
+nnoremap <silent> [unite]o :<C-u>Unite outline<CR>
+nnoremap <silent> [unite]g :<C-u>Unite grep<CR>
