@@ -41,6 +41,8 @@ NeoBundleLazy 'Shougo/vimfiler', {
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 
+NeoBundle 'thinca/vim-quickrun'
+
 " neocomplete
 if has('lua') && v:version >= 703
   NeoBundle 'Shougo/neocomplete.vim'
@@ -98,6 +100,12 @@ NeoBundleLazy 'davidhalter/jedi-vim', {
 NeoBundleLazy 'lambdalisue/vim-django-support', {
   \ 'autoload': {
   \   'filetypes': ['python', 'python3', 'htmldjango']
+  \ }}
+
+" JavaScript
+NeoBundleLazy 'leafgarland/typescript-vim', {
+  \ 'autoload': {
+  \   'filetypes': ['typescript']
   \ }}
 
 filetype plugin indent on     " Required!
