@@ -43,6 +43,33 @@ NeoBundle 'Shougo/neosnippet-snippets'
 
 NeoBundle 'thinca/vim-quickrun'
 
+" Haskell
+
+" indent
+NeoBundle 'kana/vim-filetype-haskell', {
+  \ 'autoload': {
+  \   'filetypes': ['haskell']
+  \ }}
+
+" ghc-mod
+NeoBundle 'eagletmt/ghcmod-vim', {
+  \ 'autoload': {
+  \   'filetypes': ['haskell']
+  \ }}
+
+" completion
+NeoBundle 'ujihisa/neco-ghc', {
+  \ 'autoload': {
+  \   'filetypes': ['haskell']
+  \ }}
+
+" hoogle
+NeoBundleLazy 'ujihisa/ref-hoogle', {
+  \ 'autoload': {
+  \   'filetypes': ['haskell']
+  \ }}
+
+
 " neocomplete
 if has('lua') && v:version >= 703
   NeoBundle 'Shougo/neocomplete.vim'
@@ -61,6 +88,11 @@ else
     let g:neocomplcache_enable_smart_case = 1
   endfunction
 endif
+
+
+" reference
+NeoBundle 'thinca/vim-ref'
+
 
 NeoBundleLazy 'Shougo/vimshell.git', {
   \ 'autoload': {
@@ -292,3 +324,6 @@ nnoremap <silent> [unite]m :<C-u>Unite bookmark<CR>
 nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
 nnoremap <silent> [unite]o :<C-u>Unite outline<CR>
 nnoremap <silent> [unite]g :<C-u>Unite grep<CR>
+
+" ghc-mod
+nnoremap <silent> T :<C-u>GhcModType<CR>

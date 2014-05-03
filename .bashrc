@@ -1,12 +1,10 @@
 # Python
 export PYTHONSTARTUP=~/.pythonrc.py
 
-alias la='ls -a'
 alias ll='ls -l'
+alias la='ll -a'
 
 cl()
 {
-    cd $1
-    pwd
-    ll
+    cd $1 && pwd && ll
 }
