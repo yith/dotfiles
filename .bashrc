@@ -1,3 +1,5 @@
+set -o vi
+
 # Python
 export PYTHONSTARTUP=~/.pythonrc.py
 

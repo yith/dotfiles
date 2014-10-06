@@ -1,1 +1,3 @@
 .vim/bundle
+.vim/neobundle.vim
+*.un~

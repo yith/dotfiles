@@ -70,6 +70,13 @@ NeoBundleLazy 'ujihisa/ref-hoogle', {
   \ }}
 
 
+" markdown
+NeoBundle 'plasticboy/vim-markdown', {
+  \ 'autoload': {
+  \   'filetypes': ['markdown']
+  \ }}
+
+
 " neocomplete
 if has('lua') && v:version >= 703
   NeoBundle 'Shougo/neocomplete.vim'
@@ -252,7 +259,7 @@ set encoding=utf-8
 set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
 
 " ctags
-set tags=.tags;
+set tags=tags;
 
 " EasyBuffer
 "nnoremap <F3> :<C-u>EasyBuffer<CR>
@@ -270,8 +277,8 @@ if executable('ag')
 endif
 
 " Use tabs of 4 spaces when writing Python and Django
-autocmd MyAutoCmd FileType python setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
-autocmd MyAutoCmd FileType htmldjango setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
+autocmd MyAutoCmd FileType python setl expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd MyAutoCmd FileType htmldjango setl expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 " jedi-vim
 let s:hooks = neobundle#get_hooks("jedi-vim")
@@ -327,3 +334,6 @@ nnoremap <silent> [unite]g :<C-u>Unite grep<CR>
 
 " ghc-mod
 nnoremap <silent> T :<C-u>GhcModType<CR>
+
+" markdown
+autocmd MyAutoCmd BufNewFile, BufRead *.{md} set filetype=markdown

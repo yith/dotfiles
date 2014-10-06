@@ -1,4 +1,6 @@
-bindkey -e
+# key bindings
+bindkey -v
+bindkey "^R" history-incremental-search-backward
 
 autoload -U compinit; compinit
 
@@ -32,6 +34,7 @@ cl()
     cd $1 && pwd && ll
 }
 
+
 export PATH=~/bin:~/Library/Haskell/bin:/opt/local/bin:/opt/local/sbin:${PATH}
 export PYTHONSTARTUP=~/.pythonrc.py
 
@@ -39,4 +42,3 @@ alias tree='tree -C'
 alias diff='colordiff'
 
 alias ctags='ctags -f tags --fields=+iaS'
-
