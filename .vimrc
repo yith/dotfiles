@@ -71,7 +71,7 @@ NeoBundleLazy 'ujihisa/ref-hoogle', {
 
 
 " markdown
-NeoBundle 'plasticboy/vim-markdown', {
+NeoBundleLazy 'rcmdnk/vim-markdown', {
   \ 'autoload': {
   \   'filetypes': ['markdown']
   \ }}
@@ -277,8 +277,8 @@ if executable('ag')
 endif
 
 " Use tabs of 4 spaces when writing Python and Django
-autocmd MyAutoCmd FileType python setl expandtab tabstop=2 shiftwidth=2 softtabstop=2
-autocmd MyAutoCmd FileType htmldjango setl expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd MyAutoCmd FileType python setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
+autocmd MyAutoCmd FileType htmldjango setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
 
 " jedi-vim
 let s:hooks = neobundle#get_hooks("jedi-vim")
@@ -291,6 +291,9 @@ function! s:hooks.on_source(bundle)
   endif
   let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 endfunction
+
+" .md for markdown
+autocmd BufNewFile,BufRead *.md set filetype=markdown
 
 " key bindings
 
