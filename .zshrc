@@ -6,7 +6,8 @@ source $ZSH/oh-my-zsh.sh
 
 # key bindings
 bindkey -v
-bindkey "^R" history-incremental-search-backward
+bindkey "^r" history-incremental-search-backward
+bindkey "^s" history-incremental-search-forward
 
 autoload -U compinit; compinit
 
