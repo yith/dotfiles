@@ -1,3 +1,9 @@
+# oh-my-zsh
+export ZSH=$HOME/dotfiles/oh-my-zsh
+ZSH_THEME="wezm"
+plugins=(git)
+source $ZSH/oh-my-zsh.sh
+
 # key bindings
 bindkey -v
 bindkey "^R" history-incremental-search-backward
