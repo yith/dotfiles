@@ -172,7 +172,9 @@ set shiftwidth=2
 set expandtab
 " line
 set wrap
-set colorcolumn=80
+if exists('+colorcolumn')
+  set colorcolumn=80
+endif
 " backup
 set nowritebackup
 set nobackup
