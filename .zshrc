@@ -13,6 +13,7 @@ setopt pushd_ignore_dups
 
 setopt extended_glob
 
+# history
 export HISTFILE=~/.zsh_history
 export HISTSIZE=100000000
 export SAVEHIST=100000000
@@ -23,9 +24,14 @@ setopt hist_ignore_space
 zstyle ':completion:*:default' menu select=1
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
-alias ls='ls -Gh'
+# ls
 alias ll='ls -l'
 alias la='ll -a'
+cl()
+{
+  # lazily expand ll, because ls can be aliased later
+  cd $1 && pwd && eval ll
+}
 
 # git
 alias ga='git add'
@@ -47,12 +53,7 @@ alias gp='git pull'
 alias gs='git status'
 alias gss='git status -s'
 
-cl()
-{
-    cd $1 && pwd && ll
-}
-
-
+# python
 export PYTHONSTARTUP=~/.pythonrc.py
 
 alias tree='tree -C'
