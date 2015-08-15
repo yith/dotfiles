@@ -6,11 +6,22 @@ source $ZSH/oh-my-zsh.sh
 
 # key bindings
 bindkey -v
+
+# auto completion
+fpath=($HOME/dotfiles/zsh-completions/src(N-/) $fpath)
+autoload -U compinit; compinit
+
+# history search
 bindkey "^r" history-incremental-search-backward
 bindkey "^s" history-incremental-search-forward
 
-autoload -U compinit; compinit
+autoload history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^p" history-beginning-search-backward-end
+bindkey "^n" history-beginning-search-forward-end
 
+# directory
 setopt auto_cd
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -28,7 +39,7 @@ setopt hist_ignore_dups
 setopt share_history
 setopt hist_ignore_space
 
-zstyle ':completion:*:default' menu select=1
+zstyle ':completion:*:default' menu select=2
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 # ls
@@ -67,3 +78,4 @@ alias tree='tree -C'
 #alias diff='colordiff'
 
 alias ctags='ctags -f tags --fields=+iaS'
+
