@@ -12,7 +12,28 @@ fpath=($HOME/dotfiles/zsh-completions/src(N-/) $fpath)
 autoload -U compinit; compinit
 
 # history search
-bindkey "^r" history-incremental-search-backward
+function peco-select-history() {
+  local tac
+  if which tac > /dev/null; then
+    tac="tac"
+  else
+    tac="tail -r"
+  fi
+  BUFFER=$(\history -n 1 | eval $tac | peco --query "$LBUFFER")
+  CURSOR=$#BUFFER
+  zle clear-screen
+}
+
+function search-history() {
+  if type peco > /dev/null 2>&1; then
+    peco-select-history
+  else
+    # peco not found
+    zle history-incremental-search-backward
+  fi
+}
+zle -N search-history
+bindkey "^r" search-history
 bindkey "^s" history-incremental-search-forward
 
 autoload history-search-end
