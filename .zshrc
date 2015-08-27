@@ -4,9 +4,6 @@ ZSH_THEME="wezm"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
-# key bindings
-bindkey -v
-
 # auto completion
 fpath=($HOME/dotfiles/zsh-completions/src(N-/) $fpath)
 autoload -U compinit; compinit
@@ -51,6 +48,39 @@ setopt auto_pushd
 setopt pushd_ignore_dups
 
 setopt extended_glob
+
+# magic abbrev expand
+typeset -A abbreviations
+abbreviations=(
+"G"    "| grep"
+"X"    "| xargs"
+"H"    "| head"
+"T"    "| tail"
+"C"    "| cat"
+"W"    "| wc"
+"A"    "| awk"
+"S"    "| sed"
+"E"    "2>&1 > /dev/null"
+"N"    "> /dev/null"
+
+"P"    "| peco"
+)
+
+magic-abbrev-expand() {
+  local MATCH
+  LBUFFER=${LBUFFER%%(#m)[-_a-zA-Z0-9]#}
+  LBUFFER+=${abbreviations[$MATCH]:-$MATCH}
+  zle self-insert
+}
+
+no-magic-abbrev-expand() {
+  LBUFFER+=' '
+}
+
+zle -N magic-abbrev-expand
+zle -N no-magic-abbrev-expand
+bindkey " " magic-abbrev-expand
+bindkey "^x " no-magic-abbrev-expand
 
 # history
 export HISTFILE=~/.zsh_history
