@@ -93,10 +93,4 @@ alias gs='git status'
 alias gss='git status -s'
 
 # python
-export PYTHONSTARTUP=~/.pythonrc.py
-
-alias tree='tree -C'
-#alias diff='colordiff'
-
-alias ctags='ctags -f tags --fields=+iaS'
-
+export PYTHONSTARTUP=$HOME/.pythonrc.py
