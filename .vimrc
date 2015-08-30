@@ -130,6 +130,10 @@ set ignorecase
 set hlsearch
 set incsearch
 
+" window
+set splitbelow
+set splitright
+
 " etc
 set hidden
 set history=1000
