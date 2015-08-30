@@ -82,6 +82,15 @@ zle -N no-magic-abbrev-expand
 bindkey " " magic-abbrev-expand
 bindkey "^x " no-magic-abbrev-expand
 
+# buffer stack
+show_buffer_stack() {
+  POSTDISPLAY="
+  stack: $LBUFFER"
+  zle push-line
+}
+zle -N show_buffer_stack
+bindkey "^q" show_buffer_stack
+
 # history
 export HISTFILE=~/.zsh_history
 export HISTSIZE=100000000
