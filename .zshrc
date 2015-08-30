@@ -63,6 +63,7 @@ abbreviations=(
 "E"    "2>&1 > /dev/null"
 "N"    "> /dev/null"
 
+"L"    "| less"
 "P"    "| peco"
 )
 
