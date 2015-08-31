@@ -99,6 +99,8 @@ export SAVEHIST=100000000
 setopt hist_ignore_dups
 setopt share_history
 setopt hist_ignore_space
+setopt extended_history
+setopt hist_verify
 
 zstyle ':completion:*:default' menu select=2
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
