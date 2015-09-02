@@ -111,7 +111,7 @@ alias la='ll -a'
 cl()
 {
   # lazily expand ll, because ls can be aliased later
-  cd $1 && pwd && eval ll
+  cd $1 && pwd && eval ll -tr --time=atime
 }
 
 # git
