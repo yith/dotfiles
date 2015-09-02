@@ -110,8 +110,15 @@ alias ll='ls -l'
 alias la='ll -a'
 cl()
 {
+  # sort by access time
+  if [[ "$OSTYPE" == darwin* ]]; then
+    tm='-u'
+  elif [[ "$OSTYPE" == linux* ]]; then
+    tm='--time=atime'
+  fi
+
   # lazily expand ll, because ls can be aliased later
-  cd $1 && pwd && eval ll -tr --time=atime
+  cd $1 && pwd && eval ll -tr $tm
 }
 
 # git
