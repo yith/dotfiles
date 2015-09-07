@@ -12,6 +12,3 @@ ln -s ~/dotfiles/.vim ~
 
 # install enhancd
 curl -L git.io/enhancd | sh
-
-# install fzf
-git clone --depth 1 https://github.com/junegunn/fzf.git

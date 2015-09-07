@@ -23,20 +23,12 @@ set complete=sl
 " reload .vimperatorrc
 map R :source ~/.vimperatorrc<CR>
 
-" google search
-set defsearch=google
-nnoremap s :tabopen<Space>google<Space>
-nmap S <C-c>:tabopen<Space>google<Space><C-v><CR>
-vmap S <C-c><Esc><Esc>:tabopen<Space>google<Space><C-v><CR>
-vmap <silent> <C-g> y<Esc><Esc>P
-
 " google select
-nnoremap <C-p> :googleselect<CR>
-nnoremap <C-n> :googleselect back<CR>
+nnoremap <C-n> :googleselect<CR>
+nnoremap <C-p> :googleselect back<CR>
 
 " google history search
-:bmark https://www.google.com/history/find?hl=ja&q=%s -title="Google history search" -keyword=ghist
-noremap I :open ghist
+noremap I :open https://www.google.com/history/find?hl=ja&q=%s<CR>
 
 " disable IME when command mode
 style! -name=commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
