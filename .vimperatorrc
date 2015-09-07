@@ -16,6 +16,8 @@ map <C-l> <A-Right>
 set ignorecase
 set smartcase
 
+set hintchars=hjklasdfgyuiopqwertnmzxcvb
+
 set complete=sl
 
 " private mode
@@ -24,19 +26,24 @@ noremap <C-p> :winopen -private<CR>
 " reload .vimperatorrc
 map R :source ~/.vimperatorrc<CR>
 
-" use google
+" google search
 set defsearch=google
 nnoremap s :tabopen<Space>google<Space>
 nmap S <C-c>:tabopen<Space>google<Space><C-v><CR>
 vmap S <C-c><Esc><Esc>:tabopen<Space>google<Space><C-v><CR>
+vmap <silent> <C-g> y<Esc><Esc>P
 
 " disable IME when command mode
 style! -name=commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
 set focuscontent
 
 " color
-highlight Hint font-family: Arial; font-size: 16px; font-weight: bold; text-shadow: -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black, 1px 1px 2px black; color: #33cccc;
+highlight Hint font-family: Arial; font-size: 18px; font-weight: bold; text-shadow: -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black, 1px 1px 2px black; color: #33cccc;
 highlight HintElem color: gray; background-color: #a1e4e6;
 highlight HintActive color: black; background-color: #ff8700;
+hi ErrorMsg color:white; background-color: #ec6aa1;
 
-set gui=addons,nobookmarks,nomenu,nonavigation,tabs
+set! ui.caretWidth=2
+
+set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs
+style! -name=commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
