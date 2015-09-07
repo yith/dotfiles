@@ -1,0 +1,40 @@
+" switch tabs
+map h <C-PageUp>
+map l <C-PageDown>
+
+" scroll
+map H <Left>
+map L <Right>
+noremap j 5<C-e>
+noremap k 5<C-y>
+
+" history
+map <C-h> <A-Left>
+map <C-l> <A-Right>
+
+" search
+set ignorecase
+set smartcase
+
+set complete=sl
+
+" private mode
+noremap <C-p> :winopen -private<CR>
+
+" reload .vimperatorrc
+map R :source ~/.vimperatorrc<CR>
+
+" use google
+set defsearch=google
+nnoremap s :tabopen<Space>google<Space>
+nmap S <C-c>:tabopen<Space>google<Space><C-v><CR>
+vmap S <C-c><Esc><Esc>:tabopen<Space>google<Space><C-v><CR>
+
+" disable IME when command mode
+style! -name=commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
+set focuscontent
+
+" color
+highlight Hint font-family: Arial; font-size: 16px; font-weight: bold; text-shadow: -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black, 1px 1px 2px black; color: #33cccc;
+highlight HintElem color: gray; background-color: #a1e4e6;
+highlight HintActive color: black; background-color: #ff8700;
