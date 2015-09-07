@@ -20,9 +20,6 @@ set hintchars=hjklasdfgyuiopqwertnmzxcvb
 
 set complete=sl
 
-" private mode
-noremap <C-p> :winopen -private<CR>
-
 " reload .vimperatorrc
 map R :source ~/.vimperatorrc<CR>
 
@@ -32,6 +29,14 @@ nnoremap s :tabopen<Space>google<Space>
 nmap S <C-c>:tabopen<Space>google<Space><C-v><CR>
 vmap S <C-c><Esc><Esc>:tabopen<Space>google<Space><C-v><CR>
 vmap <silent> <C-g> y<Esc><Esc>P
+
+" google select
+nnoremap <C-p> :googleselect<CR>
+nnoremap <C-n> :googleselect back<CR>
+
+" google history search
+:bmark https://www.google.com/history/find?hl=ja&q=%s -title="Google history search" -keyword=ghist
+noremap I :open ghist
 
 " disable IME when command mode
 style! -name=commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
@@ -47,3 +52,9 @@ set! ui.caretWidth=2
 
 set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs
 style! -name=commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
+
+" multi_requester.js
+nmap K <C-c>:mr<Space>wikipedia-ja<Space><C-v><CR>
+vmap K <C-c><Esc><Esc>:mr<Space>wikipedia-ja<Space><C-v><CR>
+nmap A <C-c>:mr<Space>alc<Space><C-v><CR>
+vmap A <C-c><Esc><Esc>:mr<Space>alc<Space><C-v><CR>

@@ -31,11 +31,9 @@ NeoBundleLazy 'Shougo/neomru.vim', {
   \   'unite_sources': ['file_mru'],
   \ }}
 
-NeoBundleLazy 'Shougo/vimfiler', {
+NeoBundle 'Shougo/vimfiler', {
   \ 'depends': ['Shougo/unite.vim'],
-  \ 'autoload': {
-  \     'commands' : [ 'VimFilerTab', 'VimFiler', 'VimFilerExplorer', 'VimFilerBufferDir' ]
-  \ }}
+  \ }
 
 " appearance
 NeoBundle 'mkitt/tabline.vim.git'
