@@ -161,6 +161,10 @@ set tags=tags;
 " default to verymagic when searching
 nnoremap /  /\v
 nnoremap ?  ?\v
+cnoremap %s/ %smagic/
+cnoremap \>s/ \>smagic/
+nnoremap :g/ :g/\v
+nnoremap :g// :g//
 
 " }}}
 
