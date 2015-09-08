@@ -19,7 +19,6 @@ set smartcase
 " hint
 noremap f F
 noremap F f
-"set hintchars=hjklasdfgyuiopqwertnmzxcvb
 set hintchars=hjklasdfgyuopqwertnmzxcvb
 
 set complete=sl
@@ -48,9 +47,3 @@ set! ui.caretWidth=2
 
 set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs
 style! -name=commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
-
-" multi_requester.js
-nmap K <C-c>:mr<Space>wikipedia-ja<Space><C-v><CR>
-vmap K <C-c><Esc><Esc>:mr<Space>wikipedia-ja<Space><C-v><CR>
-nmap A <C-c>:mr<Space>alc<Space><C-v><CR>
-vmap A <C-c><Esc><Esc>:mr<Space>alc<Space><C-v><CR>
