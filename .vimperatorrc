@@ -16,7 +16,11 @@ map <C-l> <A-Right>
 set ignorecase
 set smartcase
 
-set hintchars=hjklasdfgyuiopqwertnmzxcvb
+" hint
+noremap f F
+noremap F f
+"set hintchars=hjklasdfgyuiopqwertnmzxcvb
+set hintchars=hjklasdfgyuopqwertnmzxcvb
 
 set complete=sl
 
