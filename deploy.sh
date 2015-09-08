@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # copy templates for local setting files to home directory
-ln -s local/.* ~
+ln -s ~/dotfiles/local/.* ~
 
 # symlink vimperator plugins
 mkdir -p ~/.vimperator/plugin
