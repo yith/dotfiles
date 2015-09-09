@@ -54,12 +54,12 @@ typeset -A abbreviations
 abbreviations=(
 "G"    "| grep"
 "X"    "| xargs"
-"H"    "| head"
-"T"    "| tail"
-"C"    "| cat"
-"W"    "| wc"
-"A"    "| awk"
-"S"    "| sed"
+#"H"    "| head"
+#"T"    "| tail"
+#"C"    "| cat"
+#"W"    "| wc"
+#"A"    "| awk"
+#"S"    "| sed"
 "E"    "2>&1 > /dev/null"
 "N"    "> /dev/null"
 
