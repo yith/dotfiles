@@ -136,7 +136,7 @@ set splitright
 
 " etc
 set hidden
-set history=10000000
+set history=1000
 set backspace=indent,eol,start
 set modeline
 set modelines=5
