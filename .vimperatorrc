@@ -2,18 +2,18 @@ cmap <C-n> <Tab>
 cmap <C-p> <S-Tab>
 
 " switch tabs
-map h <C-PageUp>
-map l <C-PageDown>
+noremap h <C-PageUp>
+noremap l <C-PageDown>
 
 " scroll
-map H <Left>
-map L <Right>
+noremap H <Left>
+noremap L <Right>
 noremap j 5<C-e>
 noremap k 5<C-y>
 
 " history
-map <C-h> <A-Left>
-map <C-l> <A-Right>
+noremap <C-h> <A-Left>
+noremap <C-l> <A-Right>
 
 " search
 set ignorecase
