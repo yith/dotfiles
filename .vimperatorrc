@@ -33,8 +33,10 @@ map R :source ~/.vimperatorrc<CR>
 nnoremap <C-n> :googleselect<CR>
 nnoremap <C-p> :googleselect back<CR>
 
-" google history search
-noremap I :open https://www.google.com/history/find?hl=ja&q=%s<CR>
+" useful search links
+noremap <C-g> :tabopen https://www.google.com/history/find?hl=ja&q=
+noremap <C-a> :tabopen http://eow.alc.co.jp/search?q=
+noremap <C-w> :tabopen http://ja.wikipedia.org/wiki/
 
 " disable IME when command mode
 style! -name=commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
