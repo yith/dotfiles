@@ -1,3 +1,6 @@
+cmap <C-n> <Tab>
+cmap <C-p> <S-Tab>
+
 " switch tabs
 map h <C-PageUp>
 map l <C-PageDown>
@@ -47,3 +50,5 @@ set! ui.caretWidth=2
 
 set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs
 style! -name=commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
+
+echo "Loaded ~/dotfiles/.vimperatorrc"
