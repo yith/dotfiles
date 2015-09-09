@@ -35,6 +35,7 @@ nnoremap <C-p> :googleselect back<CR>
 
 " useful search links
 noremap <C-g> :tabopen https://www.google.com/history/find?hl=ja&q=
+noremap <C-y> :tabopen https://www.youtube.com/results?search_query=
 noremap <C-a> :tabopen http://eow.alc.co.jp/search?q=
 noremap <C-w> :tabopen http://ja.wikipedia.org/wiki/
 
