@@ -143,3 +143,17 @@ alias gss='git status -s'
 
 # python
 export PYTHONSTARTUP=$HOME/.pythonrc.py
+
+# echo $2 if $1 == $3 (default: 'yes')
+# A=yes; ify $A --yes => --yes
+# A=no; ify $A '--yes' => 
+# A=true; ify $A --yes true => --yes
+ify()
+{
+  if [[ ! -z $3 ]]; then
+    yes=$3
+  else
+    yes=yes
+  fi
+  [[ $1 = $yes ]] && echo $2 || echo
+}
