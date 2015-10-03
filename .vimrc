@@ -88,6 +88,11 @@ NeoBundleLazy 'rcmdnk/vim-markdown', { 'autoload': { 'filetypes': ['markdown'] }
 " binary editor
 NeoBundleLazy 'Shougo/vinarise.vim', { 'commands': [ { 'name': 'Vinarise', 'complete': 'file' } ]}
 
+" Julia
+NeoBundleLazy 'JuliaLang/julia-vim', {
+  \ 'autoload': { 'filetypes': ['julia'] }}
+
+
 call neobundle#end()
 
 filetype plugin indent on
