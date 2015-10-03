@@ -1,1 +1,1 @@
-source $HOME/.zshenv
+source $HOME/dotfiles/.zshenv
