@@ -11,6 +11,3 @@ ln -s $DF_PATH/vimperator-plugins/{caret-hint,googleselect,copy,multi_requester}
 
 # symlink .vim
 ln -s $DF_PATH/.vim ~
-
-# install enhancd
-curl -L git.io/enhancd | sh
