@@ -37,7 +37,8 @@ nnoremap <C-p> :googleselect back<CR>
 noremap <C-g> :tabopen https://www.google.com/history/find?hl=ja&q=
 noremap <C-y> :tabopen https://www.youtube.com/results?search_query=
 noremap <C-a> :tabopen http://eow.alc.co.jp/search?q=
-noremap <C-w> :tabopen http://ja.wikipedia.org/wiki/
+noremap <C-w><C-e> :tabopen http://en.wikipedia.org/wiki/
+noremap <C-w><C-j> :tabopen http://ja.wikipedia.org/wiki/
 
 " disable IME when command mode
 style! -name=commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
