@@ -41,7 +41,7 @@ NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'tomasr/molokai.git'
 
 " cursor & editting
-NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'easymotion/vim-easymotion'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'LeafCage/yankround.vim'
 
@@ -92,11 +92,17 @@ NeoBundleLazy 'Shougo/vinarise.vim', { 'commands': [ { 'name': 'Vinarise', 'comp
 NeoBundleLazy 'JuliaLang/julia-vim', {
   \ 'autoload': { 'filetypes': ['julia'] }}
 
+" C/C++
+NeoBundleLazy 'justmao945/vim-clang', {
+  \ 'autoload': { 'filetypes': ['c', 'cpp'] }}
 
-call neobundle#end()
+" misc
+NeoBundle 'christoomey/vim-tmux-navigator'
 
-filetype plugin indent on
+
 NeoBundleCheck
+call neobundle#end()
+filetype plugin indent on
 
 " }}}
 
@@ -258,9 +264,10 @@ nmap <C-n> <Plug>(yankround-next)
 " }}}
 
 " Lokaltog/vim-easymotion {{{
-let g:EasyMotion_keys='hjklasdfgyuiopqwertnmzxcvbHJKLASDFGYUIOPQWERTNMZXCVB'
-let g:EasyMotion_leader_key=";"
-let g:EasyMotion_grouping=1
+let g:EasyMotion_do_mapping=0
+"let g:EasyMotion_keys='hjklasdfgyuiopqwertnmzxcvbHJKLASDFGYUIOPQWERTNMZXCVB'
+"let g:EasyMotion_leader_key=";"
+"let g:EasyMotion_grouping=1
 " }}}
 
 " Python {{{
