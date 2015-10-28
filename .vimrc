@@ -167,7 +167,14 @@ set encoding=utf-8
 set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
 
 " ctags
-set tags=tags;
+if has("path_extra")
+  " find tags recursively
+  set tags+=tags;
+endif
+
+" space bar as leader
+"nnoremap <Space> <Nop>
+"let mapleader = "\<Space>"
 
 " default to verymagic when searching
 nnoremap /  /\v
@@ -180,13 +187,14 @@ nnoremap :g// :g//
 " }}}
 
 " Unite.vim {{{
-let s:hooks = neobundle#get_hooks('unite.vim')
-function! s:hooks.on_source(bundle)
+
+"let s:hooks = neobundle#get_hooks('unite.vim')
+"function! s:hooks.on_source(bundle)
   let g:unite_enable_start_insert = 1
   call unite#custom_default_action('source/bookmark/directory', 'vimfiler')
   call unite#custom_default_action('directory', 'vimfiler')
   call unite#custom_default_action('directory_mru', 'vimfiler')
-endfunction
+"endfunction
 
 " use ag
 if executable('ag')
@@ -199,21 +207,24 @@ endif
 nnoremap [unite] <Nop>
 nmap <Space>u [unite]
 nnoremap <silent> <F2> :<C-u>VimFilerBufferDir<CR>
-nnoremap <silent> <F3> :<C-u>Unite buffer<CR>
-nnoremap <silent> [unite]c :<C-u>UniteWithCurrentDir file_mru file<CR>
-nnoremap <silent> [unite]b :<C-u>UniteWithBufferDir file_mru file<CR>
+nnoremap <silent> <F3> :<C-u>Unite buffer file_mru file<CR>
+"nnoremap <silent> [unite]c :<C-u>UniteWithCurrentDir file_mru file<CR>
+"nnoremap <silent> [unite]b :<C-u>UniteWithBufferDir file_mru file<CR>
+nnoremap <silent> <F4> :<C-u>UniteWithCurrentDir file_mru file<CR>
+nnoremap <silent> <F5> :<C-u>UniteWithBufferDir file_mru file<CR>
 nnoremap <silent> [unite]r :<C-u>Unite register<CR>
 nnoremap <silent> [unite]t :<C-u>Unite tab<CR>
 nnoremap <silent> [unite]h :<C-u>Unite history/yank<CR>
 nnoremap <silent> [unite]o :<C-u>Unite outline<CR>
-nnoremap <silent> [unite]g :<C-u>Unite grep<CR>
+"nnoremap <silent> [unite]g :<C-u>Unite grep<CR>
+nnoremap <silent> <F6> :<C-u>Unite grep<CR>
 nnoremap <silent> [unite]m :<C-u>Unite bookmark<CR>
 nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
 " }}}
 
 " vimfiler {{{
-let s:hooks = neobundle#get_hooks('vimfiler')
-function! s:hooks.on_source(bundle)
+"let s:hooks = neobundle#get_hooks('vimfiler')
+"function! s:hooks.on_source(bundle)
   let g:vimfiler_as_default_explorer = 1
   let g:vimfiler_enable_auto_cd = 1
   let g:vimfiler_ignore_pattern = "\%(\.pyc$\)"
@@ -222,7 +233,7 @@ function! s:hooks.on_source(bundle)
   function! s:vimfiler_settings()
     nmap <buffer> <C-l> <C-w>l
   endfunction
-endfunction
+"endfunction
 " }}}
 
 " neosnippet {{{
@@ -265,9 +276,9 @@ nmap <C-n> <Plug>(yankround-next)
 
 " Lokaltog/vim-easymotion {{{
 let g:EasyMotion_do_mapping=0
-"let g:EasyMotion_keys='hjklasdfgyuiopqwertnmzxcvbHJKLASDFGYUIOPQWERTNMZXCVB'
-"let g:EasyMotion_leader_key=";"
-"let g:EasyMotion_grouping=1
+let g:EasyMotion_keys='hjklasdfgyuiopqwertnmzxcvbHJKLASDFGYUIOPQWERTNMZXCVB'
+let g:EasyMotion_leader_key=";"
+let g:EasyMotion_grouping=1
 " }}}
 
 " Python {{{
@@ -278,7 +289,7 @@ autocmd MyAutoCmd FileType setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
 
 " jedi-vim
 let s:hooks = neobundle#get_hooks("jedi-vim")
-function! s:hooks.on_source(bundle)
+"function! s:hooks.on_source(bundle)
   autocmd MyAutoCmd FileType python setl omnifunc=jedi#completions
   let g:jedi#completions_enabled = 0
   let g:jedi#auto_vim_configuration = 0
@@ -286,7 +297,7 @@ function! s:hooks.on_source(bundle)
     let g:neocomplete#force_omni_input_patterns = {}
   endif
   let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-endfunction
+"endfunction
 
 " }}}
 
@@ -296,6 +307,55 @@ autocmd MyAutoCmd BufNewFile, BufRead *.{md} set filetype=markdown
 
 " indentLine {{{
 let g:indentLine_faster = 1
+" }}}
+"
+
+" QuickRun {{{
+let g:quickrun_config = {}
+let g:quickrun_config['_'] = {
+      \   'runner': 'vimproc',
+      \   'runner/vimproc/updatetime': 50,
+      \ }
+" }}}
+
+
+" C/C++ {{{
+
+let g:clang_cpp_options = '--std=c++11'
+
+" disable auto completion for vim-clang
+let g:clang_auto = 0
+" default 'longest' can not work with neocomplete
+let g:clang_c_completeopt = 'menuone,preview'
+let g:clang_cpp_completeopt = 'menuone,preview'
+" use neocomplete
+" input patterns
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+" for c and c++
+let g:neocomplete#force_omni_input_patterns.c =
+      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+let g:neocomplete#force_omni_input_patterns.cpp =
+      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+
+
+" Syntastic
+let g:syntastic_cpp_check_header = 1
+if executable("clang++")
+  let g:syntastic_cpp_compiler = 'clang++'
+  let g:syntastic_cpp_compiler_options = '--std=c++11'
+endif
+
+" QuickRun
+if executable("clang++")
+  let g:quickrun_config['cpp/clang++11'] = {
+        \ 'cmdopt': '--std=c++11',
+        \ 'type': 'cpp/clang++',
+        \ }
+  let g:quickrun_config['cpp'] = {'type': 'cpp/clang++11'}
+endif
+
 " }}}
 
 " other key bindings {{{
@@ -322,5 +382,9 @@ nnoremap g# g#zz
 nnoremap ZZ <Nop>
 nnoremap ZQ <Nop>
 nnoremap Q <Nop>
+nnoremap <Space> <Nop>
+
+" tag jump
+"nnoremap <C-]> g<C-]>   " show multiple candidates
 
 " }
