@@ -9,23 +9,23 @@ fpath=($HOME/dotfiles/zsh-completions/src(N-/) $fpath)
 autoload -U compinit; compinit
 
 # history search
-function peco-select-history() {
+function fzf-select-history() {
   local tac
   if which tac > /dev/null; then
     tac="tac"
   else
     tac="tail -r"
   fi
-  BUFFER=$(\history -n 1 | eval $tac | peco --query "$LBUFFER")
+  BUFFER=$(\history -n 1 | eval $tac | fzf --query "$LBUFFER")
   CURSOR=$#BUFFER
   zle clear-screen
 }
 
 function search-history() {
-  if type peco > /dev/null 2>&1; then
-    peco-select-history
+  if type fzf > /dev/null 2>&1; then
+    fzf-select-history
   else
-    # peco not found
+    # fzf not found
     zle history-incremental-search-backward
   fi
 }
@@ -64,7 +64,7 @@ abbreviations=(
 "N"    "> /dev/null"
 
 "L"    "| less"
-"P"    "| peco"
+"F"    "| fzf"
 )
 
 magic-abbrev-expand() {
@@ -157,3 +157,6 @@ ify()
   fi
   [[ $1 = $yes ]] && echo $2 || echo
 }
+
+# enhancd
+source ~/.enhancd/enhancd.sh
