@@ -3,7 +3,7 @@
 DF_PATH=$HOME/dotfiles
 
 # copy templates for local setting files to home directory
-cp $DF_PATH/local/.* ~
+cp -n $DF_PATH/local/.* ~
 
 # symlink vimperator plugins
 mkdir -p ~/.vimperator/plugin
