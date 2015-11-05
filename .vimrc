@@ -303,6 +303,7 @@ let s:hooks = neobundle#get_hooks("jedi-vim")
 
 " Markdown {{{
 autocmd MyAutoCmd BufNewFile, BufRead *.{md} set filetype=markdown
+autocmd MyAutoCmd FileType markdown setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
 " }}}
 
 " indentLine {{{

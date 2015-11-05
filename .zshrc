@@ -119,7 +119,7 @@ cl()
   fi
 
   # lazily expand ll, because ls can be aliased later
-  cd $1 && pwd && eval ll -tr $tm
+  eval cd $1 && pwd && eval ll -tr $tm
 }
 
 # git
