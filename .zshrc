@@ -66,6 +66,7 @@ abbreviations=(
 
 "L"    "| less"
 "P"    "| peco"
+"F"    "| fzf"
 )
 
 magic-abbrev-expand() {
@@ -119,7 +120,7 @@ cl()
   fi
 
   # lazily expand ll, because ls can be aliased later
-  cd $1 && pwd && eval ll -tr $tm
+  eval cd $1 && pwd && eval ll -tr $tm
 }
 
 # git
@@ -159,3 +160,6 @@ ify()
   fi
   [[ $1 = $yes ]] && echo $2 || echo
 }
+
+# enhancd
+source ~/.enhancd/enhancd.sh
