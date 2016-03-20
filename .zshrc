@@ -6,7 +6,8 @@ source $ZSH/oh-my-zsh.sh
 
 # auto completion
 fpath=($HOME/dotfiles/zsh-completions/src(N-/) $fpath)
-autoload -U compinit; compinit
+autoload -U compinit
+compinit -u
 
 # history search
 function peco-select-history() {
@@ -57,7 +58,7 @@ abbreviations=(
 #"H"    "| head"
 #"T"    "| tail"
 #"C"    "| cat"
-#"W"    "| wc"
+"W"    "| wc -l"
 #"A"    "| awk"
 #"S"    "| sed"
 "E"    "2>&1 > /dev/null"
@@ -132,6 +133,7 @@ alias gob='git checkout -b'
 alias gom='git checkout master'
 alias gd='git diff'
 alias gdc='git diff --cached'
+alias gdu='git diff --diff-filter=U'  # show only unmerged diffs
 alias gdh='git diff HEAD'
 alias gl='git log'
 alias glg='git log --graph --oneline --decorate --all'

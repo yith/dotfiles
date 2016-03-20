@@ -70,8 +70,8 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
 
 " Python
-NeoBundleLazy 'davidhalter/jedi-vim', {
-  \ 'autoload': { 'filetypes': ['python', 'python3'] }}
+"NeoBundleLazy 'davidhalter/jedi-vim', {
+"  \ 'autoload': { 'filetypes': ['python', 'python3'] }}
 
 " HTML
 NeoBundleLazy 'mattn/emmet-vim', { 'autoload': { 'filetypes': ['html', 'css'] }}
@@ -288,16 +288,16 @@ autocmd MyAutoCmd FileType python setl expandtab tabstop=4 shiftwidth=4 softtabs
 autocmd MyAutoCmd FileType setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
 
 " jedi-vim
-let s:hooks = neobundle#get_hooks("jedi-vim")
-"function! s:hooks.on_source(bundle)
-  autocmd MyAutoCmd FileType python setl omnifunc=jedi#completions
-  let g:jedi#completions_enabled = 0
-  let g:jedi#auto_vim_configuration = 0
-  if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
-  endif
-  let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-"endfunction
+"let s:hooks = neobundle#get_hooks("jedi-vim")
+""function! s:hooks.on_source(bundle)
+"  autocmd MyAutoCmd FileType python setl omnifunc=jedi#completions
+"  let g:jedi#completions_enabled = 0
+"  let g:jedi#auto_vim_configuration = 0
+"  if !exists('g:neocomplete#force_omni_input_patterns')
+"    let g:neocomplete#force_omni_input_patterns = {}
+"  endif
+"  let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+""endfunction
 
 " }}}
 
