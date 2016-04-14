@@ -17,4 +17,4 @@ ln -s $DF_PATH/.vim ~
 #~/.fzf/install
 
 # enhancd
-git clone --depth 1 https://github.com/b4b4r07/enhancd.git ~/.enhancd/zsh/enhancd.zsh
+git clone --depth 1 https://github.com/b4b4r07/enhancd.git ~/.enhancd
